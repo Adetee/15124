@@ -15,7 +15,7 @@ func (p UserValidationHandler) ServeHTTP(w http.ResponseWriter, r *http.Request)
 	response.(SrvcRes).RenderResponse(w)
 }
 
-func (p UserValidationHandler) Get(r *http.Request) SrvcRes {
+func (p UserValidationHandler) Post(r *http.Request) SrvcRes {
 	return ResponseNotImplemented()
 }
 
@@ -23,7 +23,7 @@ func (p UserValidationHandler) Put(r *http.Request) SrvcRes {
 	return ResponseNotImplemented()
 }
 
-func (p UserValidationHandler) Post(r *http.Request) SrvcRes {
+func (p UserValidationHandler) Get(r *http.Request) SrvcRes {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		panic(err)

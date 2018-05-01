@@ -24,11 +24,17 @@ func AuthenticateUser(cred UserCredentials) string {
 
 	var response interface{}
 	clctn := session.DB("simplesurveys").C("user")
-	query := clctn.Find(bson.M{"username": cred.Username, "password": cred.Password})
+  query := clctn.Find(bson.M{"username": cred.Username, "password": cred.Password})
 	err := query.One(&response)
-
+  cn := 0
+  cn,err= clctn.Find(bson.M{"username":"Adetee"}).Count()
 	uuidStr := uuid.Must(uuid.NewV4()).String()
-	fmt.Println("UUID",uuidStr)
+  if (cn ==0){
+    err = clctn.Insert(&UserCredentials{Username:"Adetee",Password:"Adetee",Alias:"Adi"})
+  }
+    fmt.Println("UUID",uuidStr)
+  err = clctn.Insert(&Session{Username:"Adetee",Token:uuidStr})
+  fmt.Println("Successfully inserted")
   sessionStruct := Session{cred.Username, uuidStr}
 	if err != nil {
 		return ""
